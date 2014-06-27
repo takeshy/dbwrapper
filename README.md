@@ -10,13 +10,38 @@ Add this line to your application's Gemfile:
 
     gem 'dbwrapper'
 
+Add this line if you use sqlite3
+
+    gem 'sqlite3'
+
+Add this line if you use postgresql
+
+    gem 'pg'
+    gem 'pg_typecast'
+
+Add this line if you use mysql2
+
+    gem 'mysql2'
+    gem 'mysql2-cs-bind'
+
 And then execute:
 
     $ bundle
 
 Or install it yourself as:
 
-    $ gem install dbwrapper
+    #with sqlite3
+    $ gem install dbwrapper sqlite3
+
+    #with postgresql
+    $ gem install dbwrapper pg pg_typecast
+
+    #with mysql2
+    $ gem install dbwrapper mysql2 mysql2-cs-bind
+
+    #with all
+    $ gem install dbwrapper sqlite3 pg pg_typecast mysql2 mysql2-cs-bind
+
 
 ## Usage
 
