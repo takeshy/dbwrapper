@@ -14,12 +14,12 @@ Add this line if you use sqlite3
 
     gem 'sqlite3'
 
-Add this line if you use postgresql
+Add these lines if you use postgresql
 
     gem 'pg'
     gem 'pg_typecast'
 
-Add this line if you use mysql2
+Add these lines if you use mysql2
 
     gem 'mysql2'
     gem 'mysql2-cs-bind'
@@ -39,7 +39,7 @@ Or install it yourself as:
     #with mysql2
     $ gem install dbwrapper mysql2 mysql2-cs-bind
 
-    #with all
+    #or all
     $ gem install dbwrapper sqlite3 pg pg_typecast mysql2 mysql2-cs-bind
 
 
