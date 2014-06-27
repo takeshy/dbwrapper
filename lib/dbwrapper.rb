@@ -1,8 +1,9 @@
 require_relative "dbwrapper/version"
 require "logger"
 require "csv"
+require "fileutils"
 
-module DBwrapper
+module Dbwrapper
   class DB
     attr_reader :adapter,:client,:result
     def initialize(option)

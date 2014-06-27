@@ -22,20 +22,20 @@ Or install it yourself as:
 
 ``` ruby
 #sqlite3
-db=DBwrapper::DB.new(database: "test.sqlite3",adapter: "sqlite3")
+db=Dbwrapper::DB.new(database: "test.sqlite3",adapter: "sqlite3")
 #mysql2
-db=DBwrapper::DB.new(database: "test",adapter: "mysql2")
+db=Dbwrapper::DB.new(database: "test",adapter: "mysql2",username: "root",password: "xxxx")
 #postgresql
-db=DBwrapper::DB.new(database: "test",adapter: "postgresql")
+db=Dbwrapper::DB.new(database: "test",adapter: "postgresql",username: "root",password: "xxxx")
 
 #or merely
-db=DBwrapper::DB.new(YAML::load(File.open('database.yml'))["development"])
+db=Dbwrapper::DB.new(YAML::load(File.open('database.yml'))["development"])
 #create table depends on db type this example is mysql2. because datetime is paticular mysql.
 db.query("create table users (id integer,name text,created_at datetime)")
 #insert
 db.query('insert users (id,name,created_at) value(?,?,?)',1,"smith","2014-2014-06-26 00:00:00")
 #last_id 1
-@db.last_id
+db.last_id
 #select return array of hash [{"id"=>1, "name"=>"smith", "created_at"=>2014-06-26 00:00:00 +0900}]
 db.query("select * from users")
 #update

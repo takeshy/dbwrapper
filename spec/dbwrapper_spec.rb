@@ -6,7 +6,7 @@ DummyDate = Time.utc(2014,6,26,0,0).utc
 describe Dbwrapper do
   describe "sqlite3" do
     before(:all) do
-      @db=DBwrapper::DB.new(database: "test.sqlite3",adapter: "sqlite3")
+      @db=Dbwrapper::DB.new(database: "test.sqlite3",adapter: "sqlite3")
       @db.query("create table users (id integer,name text,created_at text)")
     end
     before do
@@ -36,7 +36,7 @@ describe Dbwrapper do
   end
   describe "psotgres" do
     before(:all) do
-      @db=DBwrapper::DB.new(database: "test",adapter: "postgresql")
+      @db=Dbwrapper::DB.new(database: "test",adapter: "postgresql")
       @db.query("create table users (id int,name text,created_at timestamp)")
     end
     before do
@@ -66,7 +66,7 @@ describe Dbwrapper do
   end
   describe "mysql2" do
     before(:all) do
-      @db=DBwrapper::DB.new(database: "test",adapter: "mysql2")
+      @db=Dbwrapper::DB.new(database: "test",adapter: "mysql2")
       @db.query("create table users (id int AUTO_INCREMENT,name text,created_at datetime,primary key(id))")
     end
     before do
@@ -97,7 +97,7 @@ describe Dbwrapper do
   describe "restore sqlite3" do
     describe "postgresql" do
       before do
-        @db=DBwrapper::DB.new(database: "test.sqlite3",adapter: "sqlite3")
+        @db=Dbwrapper::DB.new(database: "test.sqlite3",adapter: "sqlite3")
         @db.query("create table users (id integer,name text,created_at text)")
         @db.restore_table("users",File.dirname(__FILE__) + "/table/postgresql")
       end
@@ -112,7 +112,7 @@ describe Dbwrapper do
     end
     describe "mysql2" do
       before do
-        @db=DBwrapper::DB.new(database: "test.sqlite3",adapter: "sqlite3")
+        @db=Dbwrapper::DB.new(database: "test.sqlite3",adapter: "sqlite3")
         @db.query("create table users (id integer,name text,created_at text)")
         @db.restore_table("users",File.dirname(__FILE__) + "/table/mysql2")
       end
@@ -129,7 +129,7 @@ describe Dbwrapper do
   describe "restore postgresql" do
     describe "sqlite3" do
       before do
-        @db=DBwrapper::DB.new(database: "test",adapter: "postgresql")
+        @db=Dbwrapper::DB.new(database: "test",adapter: "postgresql")
         @db.query("create table users (id integer,name text,created_at timestamp)")
         @db.restore_table("users",File.dirname(__FILE__) + "/table/sqlite3")
       end
@@ -143,7 +143,7 @@ describe Dbwrapper do
     end
     describe "mysql2" do
       before do
-        @db=DBwrapper::DB.new(database: "test",adapter: "postgresql")
+        @db=Dbwrapper::DB.new(database: "test",adapter: "postgresql")
         @db.query("create table users (id integer,name text,created_at timestamp)")
         @db.restore_table("users",File.dirname(__FILE__) + "/table/mysql2")
       end
@@ -159,7 +159,7 @@ describe Dbwrapper do
   describe "restore mysql2" do
     describe "sqlite3" do
       before do
-        @db=DBwrapper::DB.new(database: "test",adapter: "mysql2")
+        @db=Dbwrapper::DB.new(database: "test",adapter: "mysql2")
         @db.query("create table users (id int AUTO_INCREMENT,name text,created_at datetime,primary key(id))")
         @db.restore_table("users",File.dirname(__FILE__) + "/table/sqlite3")
       end
@@ -173,7 +173,7 @@ describe Dbwrapper do
     end
     describe "postgresql" do
       before do
-        @db=DBwrapper::DB.new(database: "test",adapter: "mysql2")
+        @db=Dbwrapper::DB.new(database: "test",adapter: "mysql2")
         @db.query("create table users (id int AUTO_INCREMENT,name text,created_at datetime,primary key(id))")
         @db.restore_table("users",File.dirname(__FILE__) + "/table/postgresql")
       end
