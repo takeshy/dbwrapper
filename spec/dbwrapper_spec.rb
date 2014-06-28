@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'fileutils'
 require 'date'
 
-DummyDate = Time.utc(2014,6,26,0,0).utc
+DummyDate = Time.new(2014,6,26,0,0)
 describe Dbwrapper do
   describe "sqlite3" do
     before(:all) do
@@ -18,7 +18,8 @@ describe Dbwrapper do
       @db.backup_table("users",File.dirname(__FILE__) + "/table/sqlite3")
     end
     it 'select' do
-      @db.query("select id,name from users").should =~ [{"id" => 1,"name" => "hay"},{"id" => 2,"name" => "hello"},{"id" => 3,"name" => "good"}]
+      @db.query("select * from users").map{|r| {id: r["id"], name: r["name"], created_at: Time.parse(r["created_at"].to_s).to_s }}.should =~
+      [{id: 1,name: "hay",created_at: DummyDate.to_s },{id: 2,name: "hello",created_at: DummyDate.to_s},{id: 3,name: "good",created_at: DummyDate.to_s }]
     end
     it 'last_id' do
       @last_id.should == 3
@@ -48,7 +49,8 @@ describe Dbwrapper do
       @db.backup_table("users",File.dirname(__FILE__) + "/table/postgresql")
     end
     it 'select' do
-      @db.query("select id,name from users").should =~ [{"id" => 1,"name" => "hay"},{"id" => 2,"name" => "hello"},{"id" => 3,"name" => "good"}]
+      @db.query("select * from users").map{|r| {id: r["id"], name: r["name"], created_at: Time.parse(r["created_at"].to_s).to_s }}.should =~
+      [{id: 1,name: "hay",created_at: DummyDate.to_s },{id: 2,name: "hello",created_at: DummyDate.to_s},{id: 3,name: "good",created_at: DummyDate.to_s }]
     end
     it 'last_id' do
       @last_id.should == 3
@@ -78,7 +80,8 @@ describe Dbwrapper do
       @db.backup_table("users",File.dirname(__FILE__) + "/table/mysql2")
     end
     it 'select' do
-      @db.query("select id,name from users").should =~ [{"id" => 1,"name" => "hay"},{"id" => 2,"name" => "hello"},{"id" => 3,"name" => "good"}]
+      @db.query("select * from users").map{|r| {id: r["id"], name: r["name"], created_at: Time.parse(r["created_at"].to_s).to_s }}.should =~
+      [{id: 1,name: "hay",created_at: DummyDate.to_s },{id: 2,name: "hello",created_at: DummyDate.to_s},{id: 3,name: "good",created_at: DummyDate.to_s }]
     end
     it 'last_id' do
       @last_id.should == 3
@@ -102,7 +105,8 @@ describe Dbwrapper do
         @db.restore_table("users",File.dirname(__FILE__) + "/table/postgresql")
       end
       it 'select' do
-        @db.query("select id,name from users").should =~ [{"id" => 1,"name" => "hay"},{"id" => 2,"name" => "hello"},{"id" => 3,"name" => "good"}]
+        @db.query("select * from users").map{|r| {id: r["id"], name: r["name"], created_at: Time.parse(r["created_at"].to_s).to_s }}.should =~
+              [{id: 1,name: "hay",created_at: DummyDate.to_s },{id: 2,name: "hello",created_at: DummyDate.to_s},{id: 3,name: "good",created_at: DummyDate.to_s }]
       end
       after do
         @db.query("drop table users")
@@ -117,7 +121,8 @@ describe Dbwrapper do
         @db.restore_table("users",File.dirname(__FILE__) + "/table/mysql2")
       end
       it 'select' do
-        @db.query("select id,name from users").should =~ [{"id" => 1,"name" => "hay"},{"id" => 2,"name" => "hello"},{"id" => 3,"name" => "good"}]
+        @db.query("select * from users").map{|r| {id: r["id"], name: r["name"], created_at: Time.parse(r["created_at"].to_s).to_s }}.should =~
+        [{id: 1,name: "hay",created_at: DummyDate.to_s },{id: 2,name: "hello",created_at: DummyDate.to_s},{id: 3,name: "good",created_at: DummyDate.to_s }]
       end
       after do
         @db.query("drop table users")
@@ -134,7 +139,8 @@ describe Dbwrapper do
         @db.restore_table("users",File.dirname(__FILE__) + "/table/sqlite3")
       end
       it 'select' do
-        @db.query("select id,name from users").should =~ [{"id" => 1,"name" => "hay"},{"id" => 2,"name" => "hello"},{"id" => 3,"name" => "good"}]
+        @db.query("select * from users").map{|r| {id: r["id"], name: r["name"], created_at: Time.parse(r["created_at"].to_s).to_s }}.should =~
+        [{id: 1,name: "hay",created_at: DummyDate.to_s },{id: 2,name: "hello",created_at: DummyDate.to_s},{id: 3,name: "good",created_at: DummyDate.to_s }]
       end
       after do
         @db.query("drop table users")
@@ -148,7 +154,8 @@ describe Dbwrapper do
         @db.restore_table("users",File.dirname(__FILE__) + "/table/mysql2")
       end
       it 'select' do
-        @db.query("select id,name from users").should =~ [{"id" => 1,"name" => "hay"},{"id" => 2,"name" => "hello"},{"id" => 3,"name" => "good"}]
+        @db.query("select * from users").map{|r| {id: r["id"], name: r["name"], created_at: Time.parse(r["created_at"].to_s).to_s }}.should =~
+        [{id: 1,name: "hay",created_at: DummyDate.to_s },{id: 2,name: "hello",created_at: DummyDate.to_s},{id: 3,name: "good",created_at: DummyDate.to_s }]
       end
       after do
         @db.query("drop table users")
@@ -164,7 +171,8 @@ describe Dbwrapper do
         @db.restore_table("users",File.dirname(__FILE__) + "/table/sqlite3")
       end
       it 'select' do
-        @db.query("select id,name from users").should =~ [{"id" => 1,"name" => "hay"},{"id" => 2,"name" => "hello"},{"id" => 3,"name" => "good"}]
+        @db.query("select * from users").map{|r| {id: r["id"], name: r["name"], created_at: Time.parse(r["created_at"].to_s).to_s }}.should =~
+        [{id: 1,name: "hay",created_at: DummyDate.to_s },{id: 2,name: "hello",created_at: DummyDate.to_s},{id: 3,name: "good",created_at: DummyDate.to_s }]
       end
       after do
         @db.query("drop table users")
@@ -178,7 +186,8 @@ describe Dbwrapper do
         @db.restore_table("users",File.dirname(__FILE__) + "/table/postgresql")
       end
       it 'select' do
-        @db.query("select id,name from users").should =~ [{"id" => 1,"name" => "hay"},{"id" => 2,"name" => "hello"},{"id" => 3,"name" => "good"}]
+        @db.query("select * from users").map{|r| {id: r["id"], name: r["name"], created_at: Time.parse(r["created_at"].to_s).to_s }}.should =~
+        [{id: 1,name: "hay",created_at: DummyDate.to_s },{id: 2,name: "hello",created_at: DummyDate.to_s},{id: 3,name: "good",created_at: DummyDate.to_s }]
       end
       after do
         @db.query("drop table users")
