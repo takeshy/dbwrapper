@@ -28,6 +28,9 @@ module Dbwrapper
         if setting[:host]
           db_params[:host] = setting[:host]
         end
+        if setting[:port]
+          db_params[:port] = setting[:port]
+        end
         @client = Mysql2::Client.new(db_params)
       when "postgresql"
         require 'pg'
@@ -35,6 +38,9 @@ module Dbwrapper
         db_params = {:dbname => setting[:database]}
         if setting[:host]
           db_params[:host] = setting[:host]
+        end
+        if setting[:port]
+          db_params[:port] = setting[:port]
         end
         if setting[:username]
           db_params[:user]  = setting[:username]
